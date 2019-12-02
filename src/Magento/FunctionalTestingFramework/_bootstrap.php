@@ -60,7 +60,6 @@ if (file_exists(ENV_FILE_PATH . '.env')) {
     }
 }
 
-
 defined('MAGENTO_BP') || define('MAGENTO_BP', realpath(PROJECT_ROOT));
 // TODO REMOVE THIS CODE ONCE WE HAVE STOPPED SUPPORTING dev/tests/acceptance PATH
 // define TEST_PATH and TEST_MODULE_PATH
@@ -71,6 +70,13 @@ defined('TESTS_MODULE_PATH') || define(
     'TESTS_MODULE_PATH',
     realpath(TESTS_BP . $RELATIVE_TESTS_MODULE_PATH)
 );
+
+$contents = file_get_contents(TESTS_BP . '/tests/functional.suite.yml');
+$lines = explode("\n", $contents);
+foreach ($lines as $line) {
+    print_r($line. "\n");
+}
+exit(1);
 
 // add the debug flag here
 $debugMode = $_ENV['MFTF_DEBUG'] ?? false;
